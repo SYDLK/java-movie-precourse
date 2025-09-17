@@ -11,11 +11,13 @@ public class MemoryUserRepository implements UserRepository {
     private static Map<Long, User> store = new HashMap<>();
 
     @Override
-    public void save(User user){store.put(user.getId(), user);}
+    public void save(User user){
+        store.put(user.getId(), user);
+    }
 
     @Override
-    public User findById(Long Id) {
-        return store.get(Id);
+    public User findById(Long id) {
+        return store.get(id);
     }
 
     @Override
