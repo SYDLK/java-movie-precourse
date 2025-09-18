@@ -1,7 +1,6 @@
 package repository;
 
 import domain.Movie;
-import domain.User;
 
 import java.util.List;
 

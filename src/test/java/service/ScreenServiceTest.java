@@ -6,13 +6,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import repository.MemoryMovieRepository;
 import repository.MemoryScreenRepository;
-import repository.MemoryUserRepository;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class ScreenServiceTest {
     ScreenService screenService;
@@ -26,10 +25,18 @@ class ScreenServiceTest {
 
     @Test
     void join() {
-        // given: 먼저 영화 등록
-        Movie movie = new Movie(2L, "바람의 나라", LocalDate.of(2025,4,1), LocalDate.of(2025,4,2));
+        // given
+        Movie movie = new Movie(2L, "바람의 나라",
+                LocalDate.of(2025,4,1),
+                LocalDate.of(2025,4,2));
         movieService.join(movie);
-        Screening screening = new Screening(1L, movie.getId());
+
+        Screening screening = new Screening(
+                1L,
+                movie.getId(),
+                LocalDateTime.of(2025, 4, 1, 10, 0),
+                LocalDateTime.of(2025, 4, 1, 12, 0)
+        );
 
         // when
         screenService.join(screening);
@@ -45,27 +52,38 @@ class ScreenServiceTest {
     @Test
     void findScreening() {
         // given
-        Screening screening = new Screening(1L,2L);
-
+        Screening screening = new Screening(
+                1L,
+                2L,
+                LocalDateTime.of(2025, 4, 1, 14, 0),
+                LocalDateTime.of(2025, 4, 1, 16, 0)
+        );
 
         // when
         screenService.join(screening);
 
-
         // then
         assertThat(screening).isEqualTo(screenService.findScreening(1L));
-
     }
 
     @Test
     void findAllScreenings() {
         // given
-        screenService.join(new Screening(1L,2L));
-        screenService.join(new Screening(2L,3L));
+        screenService.join(new Screening(
+                1L,
+                2L,
+                LocalDateTime.of(2025, 4, 1, 10, 0),
+                LocalDateTime.of(2025, 4, 1, 12, 0)
+        ));
+        screenService.join(new Screening(
+                2L,
+                3L,
+                LocalDateTime.of(2025, 4, 1, 13, 0),
+                LocalDateTime.of(2025, 4, 1, 15, 0)
+        ));
 
         // when
         List<Screening> screenings = screenService.findAllScreenings();
-
 
         // then
         assertThat(screenings).hasSize(2);
@@ -74,8 +92,12 @@ class ScreenServiceTest {
     @Test
     void deleteScreening() {
         // given
-        screenService.join(new Screening(1L,2L));
-
+        screenService.join(new Screening(
+                1L,
+                2L,
+                LocalDateTime.of(2025, 4, 1, 9, 0),
+                LocalDateTime.of(2025, 4, 1, 11, 0)
+        ));
 
         // when
         screenService.deleteScreening(1L);

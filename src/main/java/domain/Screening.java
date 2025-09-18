@@ -7,39 +7,24 @@ public class Screening {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
-    //외래키
+    // 외래키
     private Long movieId;
 
-    public Screening(Long id, Long movieId) {
+    // 상영 시간
+    private LocalDateTime startTime;
+    private LocalDateTime endTime;
+
+    public Screening(Long id, Long movieId, LocalDateTime startTime, LocalDateTime endTime) {
         this.id = id;
+        this.movieId = movieId;
+        this.startTime = startTime;
+        this.endTime = endTime;
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
-        this.movieId = movieId;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public Long getMovieId() {
-        return movieId;
-    }
-
-    @Override
-    public String toString() {
-        return "Screening{" +
-                "id=" + id +
-                ", createdAt=" + createdAt +
-                ", updatedAt=" + updatedAt +
-                ", movieId=" + movieId +
-                '}';
-    }
+    public Long getId() { return id; }
+    public Long getMovieId() { return movieId; }
+    public LocalDateTime getStartTime() { return startTime; }
+    public LocalDateTime getEndTime() { return endTime; }
 }

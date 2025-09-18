@@ -38,6 +38,13 @@ public class User {
         return updatedAt;
     }
 
+    public void usePoints(int amount){
+        if(amount > score){
+            throw new IllegalArgumentException("포인트 부족");
+        }
+        this.score = score - amount;
+    }
+
     @Override
     public String toString() {
         return "User{" +

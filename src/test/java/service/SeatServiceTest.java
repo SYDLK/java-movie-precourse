@@ -10,10 +10,10 @@ import repository.MemoryScreenRepository;
 import repository.MemorySeatRepository;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
+
 
 class SeatServiceTest {
     SeatService seatService;
@@ -33,7 +33,11 @@ class SeatServiceTest {
         // given
         Movie movie = new Movie(2L, "바람의 나라", LocalDate.of(2025,4,1), LocalDate.of(2025,4,2));
         movieService.join(movie);
-        Screening screening = new Screening(5L, movie.getId());
+        Screening screening = new Screening(
+                5L,
+                movie.getId(),
+                LocalDateTime.of(2025, 4, 1, 10, 0),
+                LocalDateTime.of(2025, 4, 1, 12, 0));
         screenService.join(screening);
 
 
