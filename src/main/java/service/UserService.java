@@ -9,6 +9,4 @@ public interface UserService {
     User findUser(Long id);
     List<User> findUsers();
     void deleteUser(Long id);
-
-
 }

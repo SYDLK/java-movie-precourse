@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ScreenServiceImpl implements ScreenService {
-    ScreenRepository screenrepository;
+    private final ScreenRepository screenrepository;
     public ScreenServiceImpl(ScreenRepository screenrepository) {
         this.screenrepository = screenrepository;
     }
